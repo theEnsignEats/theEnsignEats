@@ -8,6 +8,6 @@ Follow the instruction to clone and run the app
 
 3.go to http://localhost:3000/ to see the output
 
-Make sure you have install all the require software like node.js, gits, ects.
+Make sure you have install all the require software like node.js, git, ects.
 
 Feel free to reach out for help.
