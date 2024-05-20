@@ -20,8 +20,8 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header className="bg-purple-900 p-4 flex justify-center items-center relative text-white">
-        <div className="hidden md:flex justify-center bg-purple-900 rounded-full border-gray-400 border shadow-lg p-1 absolute mr-4">
+      <header className="bg-teal-900 p-4 flex justify-center items-center relative text-white">
+        <div className="hidden md:flex justify-center bg-teal-900 rounded-full border-gray-400 border  p-1 absolute mr-4">
           <NavLink to="/" onClick={this.closeMenu}>Home</NavLink>
           <NavLink to="/about" onClick={this.closeMenu}>About</NavLink>
           <NavLink to="/projects" onClick={this.closeMenu}>Menu</NavLink>
