@@ -5,13 +5,10 @@ const Footer = ({ links }) => {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      data-testid={"footer"}
-      className="flex flex-col items-center bg-teal-900 p-4 border-t border-gray-300"
-    >
+    <footer className="flex flex-col items-center bg-teal-900 p-4 border-t border-gray-300">
       <ul className="flex flex-row items-center space-x-6 mb-4">
         {links.map((link, index) => (
-          <li key={index} data-testid={`footerLink${index}`}>
+          <li key={index}>
             <Link href={link.url} className="text-white hover:text-yellow-200">
               {link.title}
             </Link>
@@ -19,7 +16,7 @@ const Footer = ({ links }) => {
         ))}
       </ul>
 
-      <div className="flex items-center space-x-4 p-2">
+      <div className="flex flex-row items-center space-x-4 p-2">
         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
           <svg className="w-6 h-6 text-white hover:text-yellow-200" fill="currentColor" viewBox="0 0 30 30">
             <path d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12c0 4.84 3.68 8.83 8.44 9.74v-6.9h-2.54v-2.84h2.54V9.57c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.23.2 2.23.2v2.46h-1.25c-1.23 0-1.61.76-1.61 1.54v1.84h2.72l-.44 2.84h-2.28v6.9C18.32 20.83 22 16.84 22 12z"/>
@@ -35,9 +32,6 @@ const Footer = ({ links }) => {
             <path d="M63.999 7.989c-30.883 0-56.009 25.126-56.009 56.01 0 30.885 25.126 56.012 56.009 56.012 30.885 0 56.011-25.127 56.011-56.012-.001-30.884-25.127-56.01-56.011-56.01zm29.81 41.402a23.97 23.97 0 0 1-5.464 5.798c.009.325.015.65.015.975 0 16.334-12.429 33.229-33.229 33.229a33.135 33.135 0 0 1-17.905-5.244.997.997 0 0 1-.402-1.177.99.99 0 0 1 1.056-.658c.877.101 1.746.151 2.584.151 4.08 0 7.968-1.097 11.381-3.193a12.318 12.318 0 0 1-8.842-8.221 1.003 1.003 0 0 1 .204-.969.993.993 0 0 1 .938-.317c.188.036.377.067.565.093-3.473-2.213-5.726-6.104-5.726-10.412v-.143a1 1 0 0 1 1.485-.874c.435.241.886.45 1.349.626a12.318 12.318 0 0 1-2.742-7.762c0-2.178.577-4.322 1.668-6.199a1 1 0 0 1 1.64-.13c5.319 6.522 13.051 10.625 21.368 11.381a12.57 12.57 0 0 1-.088-1.493c0-6.797 5.531-12.327 12.329-12.327 3.207 0 6.31 1.265 8.599 3.487a21.637 21.637 0 0 0 6.351-2.519 1 1 0 1 1 1.464 1.163 12.225 12.225 0 0 1-2.32 4.188 21.278 21.278 0 0 0 2.487-.924 1 1 0 0 1 1.235 1.471z"/>
           </svg>
         </a>
-      </div>
-
-      <div className="flex flex-col items-center ">
         <div className="flex items-center">
           <svg className="w-6 h-6 text-white hover:text-yellow-200" fill="currentColor" viewBox="5 5 65 65" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -48,7 +42,7 @@ const Footer = ({ links }) => {
           </svg>
           <span className="text-white ml-2 hover:text-yellow-200">801-384-8776</span>
         </div>
-        <div className="flex items-center ">
+        <div className="flex items-center">
           <svg className="w-6 h-6 text-white hover:text-yellow-200" fill="currentColor" viewBox="2 2 25 25" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -59,8 +53,8 @@ const Footer = ({ links }) => {
           <span className="text-white ml-2 hover:text-yellow-200">contact@ensigneats.com</span>
         </div>
       </div>
-      
-      <div className="text-white text-sm mb-4 p-2" data-testid="footerContent">
+
+      <div className="text-white text-sm mb-4 p-2">
         © {year}
       </div>
     </footer>
@@ -80,8 +74,8 @@ Footer.defaultProps = {
   links: [
     { title: "Home", url: "/" },
     { title: "About", url: "/about" },
-    { title: "Menu", url: "/projects" },
-    { title: "Order", url: "/uses" },
+    { title: "Menu", url: "/menu" },
+    { title: "Order", url: "/order" },
   ],
 };
 
