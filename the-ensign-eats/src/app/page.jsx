@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "./pageLayout";
 import Hero from "./components/hero";
 import Map from "./components/map";
+import CTA from "./components/CTA";
 
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       <div className="max-w-screen-lg py-8 md:py-12">
       <Layout>
           <Hero/>
+            <CTA/>
           <div>
           <Map/>
           </div>
