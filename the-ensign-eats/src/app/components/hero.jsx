@@ -12,7 +12,7 @@ export default function Hero() {
                         <div className="hidden sm:mt-32 sm:flex lg:mt-16">
                             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-500 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                                 Feeling hungry? Come check our newest menu item{' '}
-                                <a href="#" className="whitespace-nowrap font-semibold text-orange-600">
+                                <a href="#" className="whitespace-nowrap font-semibold text-green-800">
                                     <span className="absolute inset-0" aria-hidden="true" />
                                     Read more <span aria-hidden="true">&rarr;</span>
                                 </a>
@@ -27,8 +27,8 @@ export default function Hero() {
                         </p>
                         <div className="mt-10 flex items-center gap-x-6">
                             <a
-                                href="#"
-                                className="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                href="https://www.popeyes.com/menu/section-863a184b-8058-42a8-b07b-ee524c89df19"
+                                className="rounded-md bg-green-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
                                 Order Pick-up
                             </a>
