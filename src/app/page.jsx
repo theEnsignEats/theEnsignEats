@@ -4,6 +4,7 @@ import Layout from "./pageLayout";
 import Hero from "./components/hero";
 import Map from "./components/map";
 import CTA from "./components/CTA";
+import Cards from "@/app/components/cards";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <div className="max-w-screen-lg py-8 md:py-12">
         <Layout>
           <Hero />
+          <Cards/>
           <CTA />
           <div>
             <Map />
