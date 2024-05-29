@@ -41,7 +41,7 @@ class Header extends React.Component {
           <NavLink href="/about" onClick={this.closeMenu}>
             About
           </NavLink>
-          <NavLink href="/projects" onClick={this.closeMenu}>
+          <NavLink href="/menu" onClick={this.closeMenu}>
             Menu
           </NavLink>
           <NavLink href="/uses" onClick={this.closeMenu}>
@@ -76,7 +76,7 @@ class Header extends React.Component {
             <NavLinkMobile href="/about" onClick={this.closeMenu}>
               About
             </NavLinkMobile>
-            <NavLinkMobile href="/projects" onClick={this.closeMenu}>
+            <NavLinkMobile href="/menu" onClick={this.closeMenu}>
               Menu
             </NavLinkMobile>
             <NavLinkMobile href="/uses" onClick={this.closeMenu}>
