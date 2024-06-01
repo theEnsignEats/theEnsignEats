@@ -4,20 +4,20 @@ import Layout from "./pageLayout";
 import Hero from "./components/hero";
 import Map from "./components/map";
 import CTA from "./components/CTA";
-
+import Cards from "@/app/components/cards";
 
 export default function Home() {
   return (
     <div className="min-h-screen flex justify-center items-center dark:bg-black dark:text-white">
       <div className="max-w-screen-lg py-8 md:py-12">
-      <Layout>
-          <Hero/>
-            <CTA/>
+        <Layout>
+          <Hero />
+          <Cards/>
+          <CTA />
           <div>
-          <Map/>
+            <Map />
           </div>
-
-      </Layout>
+        </Layout>
       </div>
     </div>
   );

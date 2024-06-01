@@ -20,11 +20,18 @@ class Header extends React.Component {
     this.setState({ isMobileMenuOpen: false });
   };
 
+  handleLoginClick = () => {
+    // Handle the login button click, you can redirect to a login page or perform any other action
+    window.location.href = "/login"; // Example of redirecting to a login page
+  };
+
   render() {
     return (
       <header className="bg-customYellow flex items-center  justify-center  space-x-10 sm:justify-between text-green-800 p-4">
         <div>
           <Image src={LogoX} alt="Logo Horizontal" className="h-12 w-auto" />
+          <LoginButton onClick={this.handleLoginClick} />{" "}
+          {/* Add the LoginButton component */}
         </div>
         <nav className="hidden sm:flex space-x-1.5">
           <NavLink href="/" onClick={this.closeMenu}>Home</NavLink>
@@ -69,7 +76,11 @@ class Header extends React.Component {
 
 const NavLink = ({ href, children, onClick }) => {
   return (
-    <Link href={href} onClick={onClick} className="p-2 mx-2 rounded border-b-4 border-transparent hover:border-green-800 hover:text-green-800 active:text-green-800 active:no-underline">
+    <Link
+      href={href}
+      onClick={onClick}
+      className="p-2 mx-2 rounded border-b-4 border-transparent hover:border-green-800 hover:text-green-800 active:text-green-800 active:no-underline"
+    >
       {children}
     </Link>
   );
