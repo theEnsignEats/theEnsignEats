@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LogoX from "../logos/logox.png";
+import "./LoginButton.css";
 
 class Header extends React.Component {
   constructor(props) {
@@ -30,10 +31,11 @@ class Header extends React.Component {
       <header className="bg-customYellow flex items-center  justify-center  space-x-10 sm:justify-between text-green-800 p-4">
         <div>
           <Image src={LogoX} alt="Logo Horizontal" className="h-12 w-auto" />
-          {/* <LoginButton onClick={this.handleLoginClick} /> */}
+          
           {/* Add the LoginButton component */}
         </div>
         <div className="hidden md:flex items-center space-x-1.5 p-2">
+        <LoginButton onClick={this.handleLoginClick} /> 
           <NavLink href="/" onClick={this.closeMenu}>
             Home
           </NavLink>
@@ -108,5 +110,15 @@ const NavLinkMobile = ({ href, children, onClick }) => {
   );
 };
 
+const LoginButton = ({ onClick }) => {
+  return (
+    <button
+      className="rounded-full bg-custom-yellow px-2.5 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      onClick={onClick}
+    >
+      Sign Up
+    </button>
+  );
+};
 export default Header;
 
