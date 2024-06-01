@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LogoX from "../logos/logox.png";
-import "./LoginButton.css"; // Import the CSS file for styling
 
 class Header extends React.Component {
   constructor(props) {
@@ -28,10 +27,10 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header className="bg-yellow-500 flex items-center relative text-green-800 p-2">
-        <div className="flex items-center flex-grow space-x-4">
+      <header className="bg-customYellow flex items-center  justify-center  space-x-10 sm:justify-between text-green-800 p-4">
+        <div>
           <Image src={LogoX} alt="Logo Horizontal" className="h-12 w-auto" />
-          <LoginButton onClick={this.handleLoginClick} />{" "}
+          {/* <LoginButton onClick={this.handleLoginClick} /> */}
           {/* Add the LoginButton component */}
         </div>
         <div className="hidden md:flex items-center space-x-1.5 p-2">
@@ -103,25 +102,11 @@ const NavLink = ({ href, children, onClick }) => {
 
 const NavLinkMobile = ({ href, children, onClick }) => {
   return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="block text-lg py-2 px-3 rounded-lg hover:text-green-800 hover:border-b-4 hover:border-green-800"
-    >
+    <Link href={href} onClick={onClick} className="block text-lg py-1 px-3 rounded-lg hover:text-green-800 hover:border-b-4 hover:border-green-800">
       {children}
     </Link>
   );
 };
 
-const LoginButton = ({ onClick }) => {
-  return (
-    <button
-      className="rounded-full bg-custom-yellow px-2.5 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      onClick={onClick}
-    >
-      Sign Up
-    </button>
-  );
-};
-
 export default Header;
+
