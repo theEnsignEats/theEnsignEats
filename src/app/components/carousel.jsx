@@ -40,6 +40,7 @@ const Carousel = () => {
         type="button"
         onClick={handlePrev}
         className="absolute top-1/2 left-4 transform -translate-y-1/2 px-3 py-2 rounded-full bg-gray-800/70 hover:bg-gray-800/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white z-20"
+        data-testid="prev-button"
       >
         <svg
           className="h-6 w-6 text-white"
@@ -54,6 +55,7 @@ const Carousel = () => {
         type="button"
         onClick={handleNext}
         className="absolute top-1/2 right-4 transform -translate-y-1/2 px-3 py-2 rounded-full bg-gray-800/70 hover:bg-gray-800/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white z-20"
+        data-testid="next-button"
       >
         <svg
           className="h-6 w-6 text-white"
@@ -72,6 +74,7 @@ const Carousel = () => {
               index === activeIndex ? 'bg-white' : 'bg-gray-400'
             }`}
             onClick={() => setActiveIndex(index)}
+            data-testid={`dot-${index}`}
           />
         ))}
       </div>
