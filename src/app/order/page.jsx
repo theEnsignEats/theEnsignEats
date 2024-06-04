@@ -3,15 +3,16 @@ import React from 'react';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 
-const About = () => {
+const OrderPage  = () => {
     return (
         <div>
             <main>
-                <Header />
-                <Footer />
+                <Header/>
+                
+                <Footer/>
             </main>
+            
         </div>
     );
 };
-
-export default About;
+export default OrderPage ;

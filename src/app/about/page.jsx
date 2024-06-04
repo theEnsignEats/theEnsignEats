@@ -3,16 +3,16 @@ import React from 'react';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 
-const Order = () => {
+const AboutPage  = () => {
     return (
         <div>
             <main>
-                <Header/>
-                
-                <Footer/>
+                <Header />
+                <h1>test</h1>
+                <Footer />
             </main>
-            
         </div>
     );
 };
-export default Order;
+
+export default AboutPage ;

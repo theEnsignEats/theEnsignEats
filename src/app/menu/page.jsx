@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/header.jsx";
+import Footer from "../../components/footer.jsx";
 import Carousel from "../../components/carousel.jsx";
-import MenuCards from "../../components/menuCards";
+import MenuCards from "../../components/menuCards.jsx";
 
 const MenuItems = [
   {
