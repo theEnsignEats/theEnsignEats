@@ -3,9 +3,9 @@ import React from "react";
 import Layout from "./pageLayout";
 import Hero from "../components/hero";
 import Map from "../components/map";
-import CTA from "../components/CTA";
+import CTA from "../components/cta";
 import Cards from "../components/cards";
-import Carousel from "../components/Carousel";
+//import Carousel from "../components/carousel";
 
 export default function Home() {
   return (

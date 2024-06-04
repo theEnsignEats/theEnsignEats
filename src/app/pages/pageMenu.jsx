@@ -1,5 +1,5 @@
 "use client"
-import MenuPage from '../menu/page';
+import MenuPage from '../menu/menuPage';
 const Menu = () => {
   return (
     <div>
