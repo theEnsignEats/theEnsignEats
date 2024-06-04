@@ -16,9 +16,9 @@ const Map = () => {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
-        <div className="ml-4 p-4 flex flex-col justify-center" style={{ maxWidth: '400px' }}>
+        <div className="ml-30 p-20 flex flex-col " style={{ maxWidth: '1000px' }}>
           <h style={{ color: 'black', fontSize: '20px',fontWeight: 'bold' }}>Tell us what you think?</h>
-          <p style={{ color: 'black', fontSize: '18px' }}>
+          <p style={{ color: 'black',  fontSize: '18px' }}>
             We value your feedback and would love to hear about your dining experience at The Ensign Eats.
             Whether you enjoyed your meal or have suggestions for improvement, your input helps us to serve you better.
             Please share your thoughts with us and help us create an even more enjoyable dining experience for all our guests.
