@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ".//loginButton.css";
+import "./loginButton.css";
 
 class Header extends React.Component {
   constructor(props) {
