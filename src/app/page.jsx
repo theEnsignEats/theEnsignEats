@@ -1,11 +1,11 @@
 import "tailwindcss/tailwind.css";
 import React from "react";
 import Layout from "./pageLayout";
-import Hero from "./components/hero";
-import Map from "./components/map";
-import CTA from "./components/CTA";
-import Cards from "@/app/components/cards";
-import Carousel from "./components/Carousel";
+import Hero from "../components/hero";
+import Map from "../components/map";
+import CTA from "../components/CTA";
+import Cards from "../components/cards";
+import Carousel from "../components/Carousel";
 
 export default function Home() {
   const menuItems = [
