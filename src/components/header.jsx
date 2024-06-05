@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import LogoX from "../logos/logox.png";
 import "./LoginButton.css";
 
 class Header extends React.Component {
@@ -29,7 +28,13 @@ class Header extends React.Component {
     return (
       <header className="bg-customYellow flex items-center  justify-center  space-x-10 sm:justify-between text-green-800 p-4">
         <div>
-          <Image src={LogoX} alt="Logo Horizontal" className="h-12 w-auto" />
+          <Image
+            src="/logox.png"
+            alt="Logo Horizontal"
+            width={48}
+            height={48}
+            className="h-12 w-12"
+          />
         </div>
         <div className="hidden md:flex items-center space-x-1.5 p-2">
           <LoginButton onClick={this.handleLoginClick} />
