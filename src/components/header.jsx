@@ -31,8 +31,7 @@ class Header extends React.Component {
           <Image
             src="/logox.png"
             alt="Logo Horizontal"
-            width={48}
-            height={48}
+            width={200} height={100} 
             className="h-12 w-12"
           />
         </div>
