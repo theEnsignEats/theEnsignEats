@@ -22,7 +22,7 @@ class Header extends React.Component {
   };
 
   handleLoginClick = () => {
-    href = "/login";
+    window.location.href = "/login";
   };
 
   render() {
