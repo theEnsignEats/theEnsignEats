@@ -82,7 +82,7 @@ export default function Example() {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a
               href="#"
               className="font-semibold leading-6 text-lime-300 hover:text-lime-500"
