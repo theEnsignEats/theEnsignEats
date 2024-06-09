@@ -2,15 +2,22 @@ import React from "react";
 
 const ItemCard = ({ image, name, description, price }) => {
   return (
-    <div className="w-full h-full max-w-xs bg-white rounded-lg shadow-md overflow-hidden aspect-[3/4]">
-      <img className="w-full h-3/5 object-cover" src={image} alt={name} />
-      <div className="p-3">
-        <h2 className="text-black text-xl text-black font-bold mb-2">{name}</h2>
-        <p className="text-gray-700 text-base mb-4">{description}</p>
-        <div className="text-black text-lg text-black font-semibold">
+    <div className="mx-6 flex flex-col justify-between w-64 h-full min-h-96 bg-white rounded-lg overflow-hidden">
+
+      <img className="w-full h-56 object-cover overflow-hidden mb-2" src={image} alt={name} />
+
+      <div className="h-max">
+
+        <h2 className="text-black text-xl font-bold mb-2 px-3">{name}</h2>
+
+        <p className="text-gray-700 text-sm mb-4 px-3">{description}</p>
+
+        <div className="text-black text-lg font-semibold p-3">
           {price}
         </div>
+
       </div>
+
     </div>
   );
 };
