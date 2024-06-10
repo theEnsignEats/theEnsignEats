@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import Carousel from '../app/components/carousel';
+import Carousel from '../components/carousel.jsx';
 import '@testing-library/jest-dom';
 
 jest.useFakeTimers();

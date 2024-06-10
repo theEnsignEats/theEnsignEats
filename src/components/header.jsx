@@ -2,8 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import LogoX from "../logos/logox.png";
-import "./LoginButton.css"; // Import the CSS file for styling
+import "./loginButton.css";
 
 class Header extends React.Component {
   constructor(props) {
@@ -28,13 +27,14 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header className="bg-yellow-500 flex items-center relative text-green-800 p-2">
-        <div className="flex items-center flex-grow space-x-4">
-          <Image src={LogoX} alt="Logo Horizontal" className="h-12 w-auto" />
-          <LoginButton onClick={this.handleLoginClick} />{" "}
+      <header className="bg-customYellow flex items-center  justify-center  space-x-10 sm:justify-between text-green-800 p-4">
+        <div>
+          <Image src="/logox.png" alt="Logo Horizontal" width={200} height={100} />
+          
           {/* Add the LoginButton component */}
         </div>
         <div className="hidden md:flex items-center space-x-1.5 p-2">
+        <LoginButton onClick={this.handleLoginClick} /> 
           <NavLink href="/" onClick={this.closeMenu}>
             Home
           </NavLink>
@@ -103,11 +103,7 @@ const NavLink = ({ href, children, onClick }) => {
 
 const NavLinkMobile = ({ href, children, onClick }) => {
   return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className="block text-lg py-2 px-3 rounded-lg hover:text-green-800 hover:border-b-4 hover:border-green-800"
-    >
+    <Link href={href} onClick={onClick} className="block text-lg py-1 px-3 rounded-lg hover:text-green-800 hover:border-b-4 hover:border-green-800">
       {children}
     </Link>
   );
@@ -123,5 +119,5 @@ const LoginButton = ({ onClick }) => {
     </button>
   );
 };
-
 export default Header;
+
