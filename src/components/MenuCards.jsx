@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ItemCard from "./ItemCard";
+import ItemCard from "./itemCard";
 
 const MenuCards = ({ items, onCardClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,18 +16,18 @@ const MenuCards = ({ items, onCardClick }) => {
   };
 
   const visibleItems = items
-    .slice(currentIndex, currentIndex + 3)
-    .concat(items.slice(0, Math.max(0, 3 - (items.length - currentIndex))));
+    .slice(currentIndex, currentIndex + 4)
+    .concat(items.slice(0, Math.max(0, 4 - (items.length - currentIndex))));
 
   return (
-    <div className="h-96 relative max-w-5xl mx-auto">
+    <div className="h-96 mx-auto">
       <div className="h-full flex justify-between items-center">
         <button onClick={prevSlide} className="text-3xl font-bold p-2">
           &lt;
         </button>
-        <div className="h-full flex space-x-3">
+        <div className="h-full flex">
           {visibleItems.map((item, index) => (
-            <div key={index} className="h-full flex-shrink-3 w-1/3">
+            <div key={index} className="h-full">
               <ItemCard
                 image={item.image}
                 name={item.name}

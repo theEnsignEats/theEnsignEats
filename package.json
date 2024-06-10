@@ -10,6 +10,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^15.0.7",
     "autoprefixer": "^10.4.19",
     "jest-environment-jsdom": "^29.7.0",
     "next": "^14.2.3",

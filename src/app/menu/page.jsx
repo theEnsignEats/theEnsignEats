@@ -4,8 +4,6 @@ import Header from "../../components/header.jsx";
 import Footer from "../../components/footer.jsx";
 import Carousel from "../../components/carousel.jsx";
 import MenuCards from "../../components/MenuCards.jsx";
-import Modal from "../../components/Modal.jsx";
-import Layout from "../pageLayout.jsx";
 
 const MenuItems = [
   {
@@ -53,18 +51,13 @@ const MenuPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center dark:bg-black dark:text-white">
-      <div className="">
-        <Layout>
-          <Carousel />
-          <MenuCards items={MenuItems} onCardClick={handleCardClick} />
-          <Modal
-            show={showModal}
-            onClose={closeModal}
-            selectedItem={selectedItem}
-          />
-        </Layout>
-      </div>
+    <div>
+      <main>
+        <Header />
+        <Carousel />
+        <MenuCards items={MenuItems} />
+        <Footer />
+      </main>
     </div>
   );
 };
