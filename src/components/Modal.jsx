@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 const Modal = ({ show, onClose, selectedItem }) => {
-  const defaultPrice = selectedItem && selectedItem.price ? parseFloat(selectedItem.price.slice(1)) : 0;
+  const defaultPrice =
+    selectedItem && selectedItem.price
+      ? parseFloat(selectedItem.price.slice(1))
+      : 0;
   const [selectedCombo, setSelectedCombo] = useState([]);
   const [ingredients, setIngredients] = useState({
     lettuce: "regular",
@@ -40,7 +43,9 @@ const Modal = ({ show, onClose, selectedItem }) => {
     const previousValue = ingredients[ingredient];
 
     if (previousValue === "extra" && value !== "extra") {
-      setTotalPrice((prevTotal) => prevTotal - (ingredientPrices[ingredient] || 0));
+      setTotalPrice(
+        (prevTotal) => prevTotal - (ingredientPrices[ingredient] || 0)
+      );
     } else if (previousValue !== "extra" && value === "extra") {
       setTotalPrice((prevTotal) => prevTotal + priceDifference);
     }

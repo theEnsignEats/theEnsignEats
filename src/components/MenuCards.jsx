@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ItemCard from "./itemCard";
+import ItemCard from "./ItemCard";
 
 const MenuCards = ({ items, onCardClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
