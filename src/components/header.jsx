@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import "./loginButton.css";
+import "./LoginButton.css";
 
 class Header extends React.Component {
   constructor(props) {
@@ -21,20 +21,17 @@ class Header extends React.Component {
   };
 
   handleLoginClick = () => {
-    // Handle the login button click, you can redirect to a login page or perform any other action
     window.location.href = "/login"; // Example of redirecting to a login page
   };
 
   render() {
     return (
-      <header className="bg-customYellow flex items-center  justify-center  space-x-10 sm:justify-between text-green-800 p-4">
-        <div>
+      <header className="bg-customYellow flex items-center justify-between text-green-800 px-4 p-2 relative">
+        <div className="flex items-center">
           <Image src="/logox.png" alt="Logo Horizontal" width={200} height={100} />
-          
-          {/* Add the LoginButton component */}
         </div>
         <div className="hidden md:flex items-center space-x-1.5 p-2">
-        <LoginButton onClick={this.handleLoginClick} /> 
+  
           <NavLink href="/" onClick={this.closeMenu}>
             Home
           </NavLink>
@@ -47,29 +44,30 @@ class Header extends React.Component {
           <NavLink href="/order" onClick={this.closeMenu}>
             Order
           </NavLink>
+          <LoginButton onClick={this.handleLoginClick} />
         </div>
         <button
-          className="md:hidden px-8 bg-yellow-500 hover:text-green-800 hover:shadow-md hover:shadow-green-800 hover:border-green-800 p-2 text-lg cursor-pointer rounded-full shadow-lg border-green-800 border absolute top-0 right-0 m-4 flex items-center"
+          className="md:hidden bg-yellow-500 hover:text-green-800 hover:shadow-md hover:border-green-800 p-2 px-8 text-lg cursor-pointer rounded-full shadow-lg border-green-800 border flex items-center"
           onClick={this.toggleMobileMenu}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            width="24"
-            height="24"
+            width={24}
+            height={24}
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="18" x2="20" y2="18" />
+            <line x1={4} y1={6} x2={20} y2={6} />
+            <line x1={4} y1={12} x2={20} y2={12} />
+            <line x1={4} y1={18} x2={20} y2={18} />
           </svg>
         </button>
         {this.state.isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full right-0 px-2 rounded-lg bg-yellow-500 border-green-800 border shadow-md hover:shadow-green-800 mt-0.2 mr-4 z-50">
+          <div className="md:hidden absolute top-full right-4 px-1 py-1 rounded-lg bg-yellow-500 border-green-800 border shadow-md z-50">
             <NavLinkMobile href="/" onClick={this.closeMenu}>
               Home
             </NavLinkMobile>
@@ -82,6 +80,7 @@ class Header extends React.Component {
             <NavLinkMobile href="/order" onClick={this.closeMenu}>
               Order
             </NavLinkMobile>
+            <LoginButton onClick={this.handleLoginClick} />
           </div>
         )}
       </header>
@@ -112,12 +111,12 @@ const NavLinkMobile = ({ href, children, onClick }) => {
 const LoginButton = ({ onClick }) => {
   return (
     <button
-      className="rounded-full bg-custom-yellow px-2.5 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       onClick={onClick}
     >
       Sign Up
     </button>
   );
 };
-export default Header;
 
+export default Header;

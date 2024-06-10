@@ -3,7 +3,7 @@ import React from "react";
 import Header from "../../components/header.jsx";
 import Footer from "../../components/footer.jsx";
 import Carousel from "../../components/carousel.jsx";
-import MenuCards from "../../components/menuCards.jsx";
+import MenuCards from "../../components/MenuCards.jsx";
 
 const MenuItems = [
   {
