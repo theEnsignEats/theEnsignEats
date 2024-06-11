@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 const images = [
-  '/cheeseburger-8678826_1280.jpg',
-  '/ice-cream-1274894_1280.jpg',
-  '/drink-462776_1280.jpg',
+  "/cheeseburger-8678826_1280.jpg",
+  "/ice-cream-1274894_1280.jpg",
+  "/drink-462776_1280.jpg",
 ];
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -14,7 +14,9 @@ const Carousel = () => {
     );
   };
   const handlePrev = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    setActiveIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
   };
   useEffect(() => {
     if (autoplay) {
@@ -31,7 +33,7 @@ const Carousel = () => {
             src={image}
             alt={`Slide ${index + 1}`}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${
-              index === activeIndex ? 'z-10 opacity-100' : 'z-0 opacity-0'
+              index === activeIndex ? "z-10 opacity-100" : "z-0 opacity-0"
             }`}
           />
         ))}
@@ -48,7 +50,12 @@ const Carousel = () => {
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M15 19l-7-7 7-7"
+          />
         </svg>
       </button>
       <button
@@ -63,7 +70,12 @@ const Carousel = () => {
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M9 5l7 7-7 7"
+          />
         </svg>
       </button>
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center justify-center space-x-2 z-20">
@@ -71,7 +83,7 @@ const Carousel = () => {
           <button
             key={index}
             className={`w-3 h-3 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-              index === activeIndex ? 'bg-white' : 'bg-gray-400'
+              index === activeIndex ? "bg-white" : "bg-gray-400"
             }`}
             onClick={() => setActiveIndex(index)}
             data-testid={`dot-${index}`}
