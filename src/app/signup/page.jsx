@@ -1,6 +1,41 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 
 export default function Registration() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    passwordconfirm: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Data:", formData);
+    // You can now send formData to a server or store it in localStorage
+    // For example, store in localStorage:
+    localStorage.setItem("registrationData", JSON.stringify(formData));
+
+    // Or send to a server
+    // fetch('your-server-endpoint', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(formData),
+    // }).then(response => response.json())
+    //   .then(data => console.log('Success:', data))
+    //   .catch((error) => console.error('Error:', error));
+  };
+
   return (
     <div className="flex min-h-screen flex-col justify-center items-center bg-white px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -105,7 +140,7 @@ export default function Registration() {
         <p className="mt-10 text-center text-sm text-gray-500">
           Already have an account?{" "}
           <a
-            href="#"
+            href="/login"
             className="font-medium text-emerald-600 hover:text-emerald-500"
           >
             Sign in

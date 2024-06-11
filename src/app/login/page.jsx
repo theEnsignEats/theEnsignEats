@@ -1,7 +1,36 @@
-import React from "react";
+"use client"; // This directive tells Next.js to treat this file as a client component
 
+import React, { useState } from "react";
 
 export default function Example() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const storedData = localStorage.getItem("registrationData");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      if (email === parsedData.email && password === parsedData.password) {
+        console.log("Sign-in successful!");
+        // Redirect to a protected page or dashboard
+      } else {
+        setError("Invalid email or password.");
+      }
+    } else {
+      setError("No registered account found.");
+    }
+  };
+
   return (
     <div className="min-h-full flex flex-col justify-center items-center bg-white px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -16,7 +45,7 @@ export default function Example() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm bg-white p-8 shadow-lg rounded-lg">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
@@ -31,6 +60,8 @@ export default function Example() {
                 type="email"
                 autoComplete="email"
                 required
+                value={email}
+                onChange={handleEmailChange}
                 className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 sm:text-sm"
               />
             </div>
@@ -60,10 +91,14 @@ export default function Example() {
                 type="password"
                 autoComplete="current-password"
                 required
+                value={password}
+                onChange={handlePasswordChange}
                 className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 sm:text-sm"
               />
             </div>
           </div>
+
+          {error && <div className="text-red-600 text-sm">{error}</div>}
 
           <div>
             <button
