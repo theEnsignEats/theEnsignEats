@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ItemCard from "./ItemCard";
 
-const MenuCards = ({ items }) => {
+const MenuCards = ({ items, onCardClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -33,6 +33,7 @@ const MenuCards = ({ items }) => {
                 name={item.name}
                 description={item.description}
                 price={item.price}
+                onClick={() => onCardClick(item)}
               />
             </div>
           ))}

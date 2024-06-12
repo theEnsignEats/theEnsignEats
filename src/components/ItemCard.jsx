@@ -1,8 +1,9 @@
 import React from "react";
 
-const ItemCard = ({ image, name, description, price }) => {
+const ItemCard = ({ image, name, description, price, onClick }) => {
   return (
-    <div className="mx-6 flex flex-col justify-between w-64 h-full min-h-96 bg-white rounded-lg overflow-hidden">
+    <div className="mx-6 flex flex-col justify-between w-64 h-full min-h-96 bg-white rounded-lg overflow-hidden"
+    onClick={onClick} >
 
       <img className="w-full h-56 object-cover overflow-hidden mb-2" src={image} alt={name} />
 

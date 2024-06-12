@@ -1,8 +1,9 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import MenuCards from "./MenuCards";
 import { MENU_ITEMS } from "../constants";
 
-const MenuSection = () => {
+const MenuSection = ({ onCardClick }) => {
   return (
     <div className="mb-12">
       <div className="bg-purple-500r">
@@ -14,7 +15,7 @@ const MenuSection = () => {
             <h2 className=" text-orange-500 text-2xl font-bold m-16 mb-2">
               {category.categoryName}
             </h2>
-            <MenuCards key={index} items={category.items} />
+            <MenuCards key={index} items={category.items} onCardClick={onCardClick} />
           </div>
         ))}
       </div>
