@@ -4,6 +4,7 @@ import Header from "../../components/header.jsx";
 import Footer from "../../components/footer.jsx";
 import Carousel from "../../components/carousel.jsx";
 import MenuCards from "../../components/MenuCards.jsx";
+import MenuSection from "../../components/menuSection.jsx";
 
 const MenuItems = [
   {
@@ -42,7 +43,9 @@ const MenuPage = () => {
       <main>
         <Header />
         <Carousel />
-        <MenuCards items={MenuItems} />
+        <div className="flex justify-center">
+          <MenuSection />
+        </div>
         <Footer />
       </main>
     </div>
