@@ -2,7 +2,7 @@ import React from "react";
 import MenuCards from "./MenuCards";
 import { MENU_ITEMS } from "../constants";
 
-const menuSection = () => {
+const MenuSection = () => {
   return (
     <div className="mb-12">
       <div className="bg-purple-500r">
@@ -22,4 +22,4 @@ const menuSection = () => {
   );
 };
 
-export default menuSection;
+export default MenuSection;
