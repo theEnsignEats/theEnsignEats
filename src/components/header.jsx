@@ -36,7 +36,7 @@ class Header extends React.Component {
           />
         </div>
         <div className="hidden md:flex items-center space-x-1.5 p-2">
-          <LoginButton onClick={this.handleLoginClick} />
+
           <NavLink href="/" onClick={this.closeMenu}>
             Home
           </NavLink>
