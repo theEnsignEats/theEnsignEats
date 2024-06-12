@@ -45,7 +45,10 @@ export default function Registration() {
         )}
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Name
             </label>
             <div className="mt-2">
@@ -63,7 +66,10 @@ export default function Registration() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email address
             </label>
             <div className="mt-2">
@@ -81,7 +87,10 @@ export default function Registration() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <div className="mt-2">
@@ -99,7 +108,10 @@ export default function Registration() {
           </div>
 
           <div>
-            <label htmlFor="password-confirm" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password-confirm"
+              className="block text-sm font-medium text-gray-700"
+            >
               Confirm Password
             </label>
             <div className="mt-2">
@@ -128,7 +140,10 @@ export default function Registration() {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Already have an account?{" "}
-          <a href="/login" className="font-medium text-emerald-600 hover:text-emerald-500">
+          <a
+            href="/login"
+            className="font-medium text-emerald-600 hover:text-emerald-500"
+          >
             Sign in
           </a>
         </p>
