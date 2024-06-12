@@ -1,32 +1,66 @@
+"use client"; // This directive tells Next.js to treat this file as a client component
+
+import React, { useState } from "react";
+
 export default function Example() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const storedData = localStorage.getItem("registrationData");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      if (email === parsedData.email && password === parsedData.password) {
+        console.log("Sign-in successful!");
+        setLoginSuccess(true);
+      } else {
+        setError("Invalid email or password.");
+      }
+    } else {
+      setError("No registered account found.");
+    }
+  };
+
   return (
-    <>
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white"
-          <body class="h-full">
-          ```
-        */}
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="min-h-full flex flex-col justify-center items-center bg-white px-6 py-12 lg:px-8">
+      {loginSuccess ? (
+        <div className="text-center">
+          <h2 className="text-3xl font-bold leading-9 tracking-tight text-emerald-600">
+            Login Successful!
+          </h2>
+          <p className="mt-4 text-gray-500">Welcome back!</p>
+        </div>
+      ) : (
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
             src="./Burger Logo ensign eats B&W.png"
-            alt="Burguer"
+            alt="Burger"
           />
-          <h2 className="mt-15 text-center text-2xl font-semibold leading-9 tracking-tight text-lime-600">
+          <h2 className="mt-6 text-center text-3xl font-bold leading-9 tracking-tight text-emerald-600">
             Sign in to your account
           </h2>
         </div>
+      )}
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+      {!loginSuccess && (
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm bg-white p-8 shadow-lg rounded-lg">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-amber-300"
+                className="block text-sm font-medium text-gray-700"
               >
                 Email address
               </label>
@@ -37,7 +71,9 @@ export default function Example() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 pl-3 text-stone-600 shadow-sm ring-3 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 sm:text-sm"
                 />
               </div>
             </div>
@@ -46,14 +82,14 @@ export default function Example() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-amber-300"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Password
                 </label>
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-semibold text-lime-200 hover:text-lime-500"
+                    className="font-medium text-emerald-600 hover:text-emerald-500"
                   >
                     Forgot password?
                   </a>
@@ -66,15 +102,19 @@ export default function Example() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 pl-3 text-stone-700 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-200 sm:text-sm sm:leading-6"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  className="block w-full rounded-md border border-gray-300 py-2 px-3 text-gray-700 shadow-sm focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 sm:text-sm"
                 />
               </div>
             </div>
 
+            {error && <div className="text-red-600 text-sm">{error}</div>}
+
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
               >
                 Sign in
               </button>
@@ -82,16 +122,16 @@ export default function Example() {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Don&apos;t have an account?{" "}
+            Don't have an account?{" "}
             <a
-              href="#"
-              className="font-semibold leading-6 text-lime-300 hover:text-lime-500"
+              href="/signup"
+              className="font-medium text-emerald-600 hover:text-emerald-500"
             >
               Register for free! & Earn rewards
             </a>
           </p>
         </div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
