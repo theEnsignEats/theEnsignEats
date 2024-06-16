@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "target": "es6",
+    "jsx": "react"
+  }, 
+  "include": [
+    "src/**/*"
+  ]
+}
