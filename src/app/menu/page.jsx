@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Header from "../../components/header.jsx";
 import Footer from "../../components/footer.jsx";
 import Carousel from "../../components/carousel.jsx";
-import MenuCards from "../../components/MenuCards.jsx";
+import MenuCards from "../../components/menuCards.jsx";
 import MenuSection from "../../components/menuSection.jsx";
 import Modal from "../../components/Modal.jsx";
 
@@ -60,7 +60,11 @@ const MenuPage = () => {
         <div className="flex justify-center">
           <MenuSection onCardClick={handleCardClick} />
         </div>
-        <Modal show={showModal} onClose={closeModal} selectedItem={selectedItem} />
+        <Modal
+          show={showModal}
+          onClose={closeModal}
+          selectedItem={selectedItem}
+        />
         <Footer />
       </main>
     </div>
