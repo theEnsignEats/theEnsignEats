@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   experimental: {
-    appDir: true,
+   // appDir: true,
   },
   webpack: (config, { isServer }) => {
     config.resolve.alias['@'] = path.join(__dirname, 'src');
