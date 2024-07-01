@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import "./LoginButton.css";
 
 class Header extends React.Component {
   constructor(props) {
@@ -21,7 +20,7 @@ class Header extends React.Component {
   };
 
   handleLoginClick = () => {
-    window.location.href = "/login"; // Example of redirecting to a login page
+    window.location.assign("/login"); // Updated to use window.location.assign
   };
 
   render() {
@@ -49,11 +48,17 @@ class Header extends React.Component {
             <NavLink href="/order" onClick={this.closeMenu}>
               Order
             </NavLink>
-            <LoginButton onClick={this.handleLoginClick} />
+            <button
+              className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={this.handleLoginClick}
+            >
+              Sign Up
+            </button>
           </div>
           <div className="relative">
             <button
-              className="md:hidden bg-yellow-500 hover:text-green-800 hover:shadow-md hover:border-green-800 p-2 px-8 text-lg cursor-pointer rounded-full shadow-lg border-green-800 border flex items-center"
+              aria-label="Toggle menu" // Added aria-label
+              className="md:hidden bg-yellow1 hover:text-green-800 hover:shadow-md hover:border-green-800 p-2 px-8 text-lg cursor-pointer rounded-full shadow-lg border-green-800 border flex items-center"
               onClick={this.toggleMobileMenu}
             >
               <svg
@@ -73,7 +78,7 @@ class Header extends React.Component {
               </svg>
             </button>
             {this.state.isMobileMenuOpen && (
-              <div className="absolute top-full left-0 w-full mt-2 px-1 py-1 rounded-lg bg-yellow-500 border-green-800 border shadow-md z-50">
+              <div className="absolute top-full left-0 w-full mt-2 px-1 py-1 rounded-lg bg-yellow1 border-green-800 border shadow-md z-50">
                 <NavLinkMobile href="/" onClick={this.closeMenu}>
                   Home
                 </NavLinkMobile>
@@ -86,7 +91,12 @@ class Header extends React.Component {
                 <NavLinkMobile href="/order" onClick={this.closeMenu}>
                   Order
                 </NavLinkMobile>
-                <LoginButton onClick={this.handleLoginClick} />
+                <button
+                  className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full text-left"
+                  onClick={this.handleLoginClick}
+                >
+                  Sign Up
+                </button>
               </div>
             )}
           </div>
@@ -117,17 +127,6 @@ const NavLinkMobile = ({ href, children, onClick }) => {
     >
       {children}
     </Link>
-  );
-};
-
-const LoginButton = ({ onClick }) => {
-  return (
-    <button
-      className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      onClick={onClick}
-    >
-      Sign Up
-    </button>
   );
 };
 
