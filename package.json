@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@vercel/postgres": "^0.8.0",
+    "@vercel/postgres": "^0.9.0",
     "autoprefixer": "^10.4.19",
     "jest-environment-jsdom": "^29.7.0",
     "next": "^14.2.3",
