@@ -52,7 +52,13 @@ const AboutPage = () => {
                                 We believe in fostering a supportive and collaborative work environment. Continuous training and development opportunities help our team grow both personally and professionally, enabling us to deliver exceptional experiences for our customers.
                             </p>
                             <div className="flex justify-center items-center w-full mb-4">
-                                <video autoPlay loop muted className="rounded-lg shadow-md border-4 border-green-800 object-cover w-full ">
+                                <video
+                                    autoPlay
+                                    loop
+                                    muted
+                                    data-testid="kitchen-video"
+                                    className="rounded-lg shadow-md border-4 border-green-800 object-cover w-full"
+                                >
                                     <source src="/kitchen.mp4" type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
@@ -79,18 +85,21 @@ const AboutPage = () => {
                     </div>
 
                 </div>
-
                 {/* Awards for Best Food Card */}
                 <div className="bg-white shadow-md rounded-lg p-8 border-t-4 border-gold">
-                    <h2 className="text-3xl font-semibold text-gold mb-4">Awards for Best Food</h2>
-                    <p className="text-lg text-gray-700 mb-4">
-                        We take pride in our culinary creations and have been recognized for our outstanding food. Our burgers have won several local awards for taste and quality.
-                    </p>
-                    <p className="text-lg text-gray-700 mb-4">
-                        Thank you for choosing Ensign Eats. We look forward to serving you soon!
-                    </p>
-                    <div className="flex justify-center mt-6">
-                        {/* Optional: Add any other content here */}
+                    <h2 className="text-3xl font-semibold text-gold mb-4">Here you can find the BEST in town!</h2>
+                    <div className="flex flex-col-reverse sm:flex-row items-start">
+                        <p className="text-lg text-green-800 mb-4 flex-grow">
+                            Ensign Eats has won the Best Burger in Salt Lake City award for four years in a row. Our burgers are famous for being juicy and made with fresh ingredients, making those a favorite among locals. This consistent win shows our dedication in always give the best to Ensign students and Salt lake citizens.
+                        </p>
+                        <Image src="/bestburguer.png" alt="Best Burger Award Seal" width={100} height={100} className="rounded-full sm:ml-4 mb-4 sm:mb-0 mx-auto sm:mx-0 w-24 h-24 sm:w-auto sm:h-auto" />
+                    </div>
+                    <div className="block border-t-4 border-gold my-10"></div> {/* Horizontal divider */}
+                    <div className="flex flex-col-reverse sm:flex-row items-start">
+                        <p className="text-lg text-green-800 mb-4 flex-grow">
+                            Along with their burgers, Ensign Eats' Strawberry Shortcake has won the Best Dessert award. This dessert, with its layers of soft shortcake, fresh strawberries, and whipped cream, is a hit with dessert lovers. Ensign Eats’ success in both burgers and desserts highlights their skill and commitment to delicious food.
+                        </p>
+                        <Image src="/bestdessert.jpg" alt="Best Dessert Award Seal" width={100} height={100} className="rounded-full sm:ml-4 mb-4 sm:mb-0 mx-auto sm:mx-0 w-24 h-24 sm:w-auto sm:h-auto" />
                     </div>
                 </div>
             </main>
