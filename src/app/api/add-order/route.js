@@ -1,45 +1,48 @@
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const customerName = searchParams.get('customerName');
-  const orderItems = searchParams.get('orderItems');
-  const orderTotal = searchParams.get('orderTotal');
-
+export async function POST(request) {
   try {
+    const { customerName, orderItems } = await request.json();
+
     // Validate parameters
-    if (!customerName || !orderItems || !orderTotal) {
-      throw new Error('Customer name, order items, and order total are required');
+    if (!customerName || !orderItems) {
+      return NextResponse.json({ error: 'Customer name and order items are required' }, { status: 400 });
     }
 
     // Parse orderItems JSON
-    const parsedOrderItems = JSON.parse(orderItems);
-    if (!Array.isArray(parsedOrderItems)) {
-      throw new Error('Order items should be an array');
+    if (!Array.isArray(orderItems)) {
+      return NextResponse.json({ error: 'Order items should be an array' }, { status: 400 });
     }
 
-    console.log(`Received parameters: customerName=${customerName}, orderItems=${JSON.stringify(parsedOrderItems)}, orderTotal=${orderTotal}`);
+    // Calculate the order total
+    const orderTotal = orderItems.reduce((total, item) => {
+      if (typeof item.price !== 'number' || typeof item.quantity !== 'number') {
+        throw new Error('Each order item must have a numeric price and quantity');
+      }
+      return total + item.price * item.quantity;
+    }, 0);
+
+    console.log(`Received parameters: customerName=${customerName}, orderItems=${JSON.stringify(orderItems)}, orderTotal=${orderTotal}`);
 
     // Insert the new order
     await sql`
       INSERT INTO Orders (customerName, orderItems, orderTotal) 
-      VALUES (${customerName}, ${JSON.stringify(parsedOrderItems)}::jsonb, ${orderTotal}::numeric);
+      VALUES (${customerName}, ${JSON.stringify(orderItems)}::jsonb, ${orderTotal}::numeric);
     `;
     console.log(`Order for customer: ${customerName} has been added to the database.`);
 
     // Fetch and return all orders
-    const orders = await sql`SELECT * FROM Orders;`;
-    
+    const result = await sql`SELECT * FROM Orders;`;
+
+    // Ensure result.rows exists for map function
+    const orders = result.rows || [];
+
     // Process and return orders
-    const processedOrders = orders.rows.map(order => ({
+    const processedOrders = orders.map(order => ({
       orderID: order.orderid,
       customerName: order.customername,
-      orderItems: order.orderitems.map(item => ({
-        item: item.item,
-        quantity: item.quantity,
-        itemPrice: item.itemPrice // Ensure this field is correctly referenced
-      })),
+      orderItems: order.orderitems,
       orderTotal: order.ordertotal
     }));
 
