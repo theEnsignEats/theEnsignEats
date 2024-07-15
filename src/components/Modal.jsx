@@ -5,6 +5,7 @@ const Modal = ({ show, onClose, selectedItem }) => {
     selectedItem && selectedItem.price
       ? parseFloat(selectedItem.price.slice(1))
       : 0;
+
   const [selectedCombo, setSelectedCombo] = useState([]);
   const [ingredients, setIngredients] = useState({
     lettuce: "regular",
@@ -14,6 +15,7 @@ const Modal = ({ show, onClose, selectedItem }) => {
   });
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [totalPrice, setTotalPrice] = useState(defaultPrice);
+  const [view, setView] = useState('Burgers'); // State for current view
 
   const ingredientPrices = {
     cheese: 0.99,
@@ -103,113 +105,241 @@ const Modal = ({ show, onClose, selectedItem }) => {
                 alt={selectedItem.name}
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
-              <p className="text-gray-800 font-bold mb-2">Add to your meal</p>
-              <div className="mb-2 flex justify-between">
-                <button
-                  className={`relative border rounded p-3 flex items-center justify-center ${
-                    selectedCombo.includes("fries")
-                      ? "border-yellow-500"
-                      : "border-gray-200"
-                  } text-gray-700`}
-                  onClick={() => handleComboSelection("fries")}
-                  style={{ width: "30%" }}
-                >
-                  <span className="mr-2 text-3xl">🍟</span>Fries
-                  {selectedCombo.includes("fries") && (
-                    <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
-                      ✓
+
+              {selectedItem.categoryName === 'Burgers' && (
+                <div>
+                  <p className="text-gray-800 font-bold mb-2">Add to your meal</p>
+                  <div className="mb-2 flex justify-between">
+                    <button
+                      className={`relative border rounded p-3 flex items-center justify-center ${
+                        selectedCombo.includes("fries")
+                          ? "border-yellow-500"
+                          : "border-gray-200"
+                      } text-gray-700`}
+                      onClick={() => handleComboSelection("fries")}
+                      style={{ width: "30%" }}
+                    >
+                      <span className="mr-2 text-3xl">🍟</span>Fries
+                      {selectedCombo.includes("fries") && (
+                        <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                          ✓
+                        </span>
+                      )}
+                    </button>
+                    <button
+                      className={`relative border rounded p-3 flex items-center justify-center ${
+                        selectedCombo.includes("soda")
+                          ? "border-yellow-500"
+                          : "border-gray-200"
+                      } text-gray-700`}
+                      onClick={() => handleComboSelection("soda")}
+                      style={{ width: "30%" }}
+                    >
+                      <span className="mr-2 text-3xl">🥤</span>Drinks
+                      {selectedCombo.includes("soda") && (
+                        <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                          ✓
+                        </span>
+                      )}
+                    </button>
+                    <button
+                      className={`relative border rounded p-3 flex items-center justify-center ${
+                        selectedCombo.includes("iceCream")
+                          ? "border-yellow-500"
+                          : "border-gray-200"
+                      } text-gray-700`}
+                      onClick={() => handleComboSelection("iceCream")}
+                      style={{ width: "30%" }}
+                    >
+                      <span className="mr-2 text-3xl">🍦</span>Desserts
+                      {selectedCombo.includes("iceCream") && (
+                        <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                          ✓
+                        </span>
+                      )}
+                    </button>
+                  </div>
+                  <div className="mt-2">
+                <p className="text-gray-800 font-bold mb-1">Customize Ingredients</p>
+                {Object.keys(ingredients).map((ingredient) => (
+                  <div key={ingredient} className="mb-1 flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={ingredients[ingredient] !== "none"}
+                      onChange={() => handleCheckboxChange(ingredient)}
+                      className="mr-2 text-teal-900"
+                    />
+                    <span className="mr-2 capitalize text-gray-900">
+                      {ingredient}
                     </span>
-                  )}
-                </button>
-                <button
-                  className={`relative border rounded p-3 flex items-center justify-center ${
-                    selectedCombo.includes("soda")
-                      ? "border-yellow-500"
-                      : "border-gray-200"
-                  } text-gray-700`}
-                  onClick={() => handleComboSelection("soda")}
-                  style={{ width: "30%" }}
-                >
-                  <span className="mr-2 text-3xl">🥤</span>Soda
-                  {selectedCombo.includes("soda") && (
-                    <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
-                      ✓
-                    </span>
-                  )}
-                </button>
-                <button
-                  className={`relative border rounded p-3 flex items-center justify-center ${
-                    selectedCombo.includes("iceCream")
-                      ? "border-yellow-500"
-                      : "border-gray-200"
-                  } text-gray-700`}
-                  onClick={() => handleComboSelection("iceCream")}
-                  style={{ width: "30%" }}
-                >
-                  <span className="mr-2 text-3xl">🍦</span>Ice Cream
-                  {selectedCombo.includes("iceCream") && (
-                    <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
-                      ✓
-                    </span>
-                  )}
-                </button>
+                    {selectedIngredient === ingredient && (
+                      <div className="flex space-x-2 ml-auto">
+                        <button
+                          className={`px-2 py-1 rounded text-sm ${
+                            ingredients[ingredient] === "light"
+                              ? "bg-teal-900 text-white"
+                              : "bg-gray-200"
+                          }`}
+                          onClick={() =>
+                            handleIngredientChange(ingredient, "light")
+                          }
+                        >
+                          Light
+                        </button>
+                        <button
+                          className={`px-2 py-1 rounded text-sm ${
+                            ingredients[ingredient] === "regular"
+                              ? "bg-teal-900 text-white"
+                              : "bg-gray-200"
+                          }`}
+                          onClick={() =>
+                            handleIngredientChange(ingredient, "regular")
+                          }
+                        >
+                          Regular
+                        </button>
+                        <button
+                          className={`px-2 py-1 rounded text-sm ${
+                            ingredients[ingredient] === "extra"
+                              ? "bg-teal-900 text-white"
+                              : "bg-gray-200"
+                          }`}
+                          onClick={() =>
+                            handleIngredientChange(ingredient, "extra")
+                          }
+                        >
+                          Extra (+${ingredientPrices[ingredient] || "0.00"})
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className="mt-2">
-              <p className="text-gray-800 font-bold mb-1">Customize</p>
-              {Object.keys(ingredients).map((ingredient) => (
-                <div key={ingredient} className="mb-1 flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={ingredients[ingredient] !== "none"}
-                    onChange={() => handleCheckboxChange(ingredient)}
-                    className="mr-2 text-teal-900"
-                  />
-                  <span className="mr-2 capitalize text-gray-900">
-                    {ingredient}
-                  </span>
-                  {selectedIngredient === ingredient && (
-                    <div className="flex space-x-2 ml-auto">
-                      <button
-                        className={`px-2 py-1 rounded text-sm ${
-                          ingredients[ingredient] === "light"
-                            ? "bg-teal-900 text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() =>
-                          handleIngredientChange(ingredient, "light")
-                        }
-                      >
-                        Light
-                      </button>
-                      <button
-                        className={`px-2 py-1 rounded text-sm ${
-                          ingredients[ingredient] === "regular"
-                            ? "bg-teal-900 text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() =>
-                          handleIngredientChange(ingredient, "regular")
-                        }
-                      >
-                        Regular
-                      </button>
-                      <button
-                        className={`px-2 py-1 rounded text-sm ${
-                          ingredients[ingredient] === "extra"
-                            ? "bg-teal-900 text-white"
-                            : "bg-gray-200"
-                        }`}
-                        onClick={() =>
-                          handleIngredientChange(ingredient, "extra")
-                        }
-                      >
-                        Extra (+${ingredientPrices[ingredient] || "0.00"})
-                      </button>
-                    </div>
-                  )}
                 </div>
-              ))}
+              )}
+
+              {selectedItem.categoryName === 'Drinks' && (
+                <div>
+                <p className="text-gray-800 font-bold mb-2">Add to your meal</p>
+                <div className="mb-2 flex justify-between">
+                  <button
+                    className={`relative border rounded p-3 flex items-center justify-center ${
+                      selectedCombo.includes("fries")
+                        ? "border-yellow-500"
+                        : "border-gray-200"
+                    } text-gray-700`}
+                    onClick={() => handleComboSelection("fries")}
+                    style={{ width: "30%" }}
+                  >
+                    <span className="mr-2 text-3xl">🍟</span>Fries
+                    {selectedCombo.includes("fries") && (
+                      <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    className={`relative border rounded p-3 flex items-center justify-center ${
+                      selectedCombo.includes("soda")
+                        ? "border-yellow-500"
+                        : "border-gray-200"
+                    } text-gray-700`}
+                    onClick={() => handleComboSelection("soda")}
+                    style={{ width: "30%" }}
+                  >
+                    <span className="mr-2 text-3xl">🍔</span>Burgers
+                    {selectedCombo.includes("soda") && (
+                      <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    className={`relative border rounded p-3 flex items-center justify-center ${
+                      selectedCombo.includes("iceCream")
+                        ? "border-yellow-500"
+                        : "border-gray-200"
+                    } text-gray-700`}
+                    onClick={() => handleComboSelection("iceCream")}
+                    style={{ width: "30%" }}
+                  >
+                    <span className="mr-2 text-3xl">🍦</span>Desserts
+                    {selectedCombo.includes("iceCream") && (
+                      <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <div>
+                  <p className="text-gray-800 font-bold mb-2">Customize Drink Size</p>
+                  {/* Add content for desserts customization */}
+                  <p className="text-gray-600 mb-2">Dessert customization options will go here.</p>
+                </div>
+              </div>
+              )}
+
+              {selectedItem.categoryName === 'Desserts' && (
+                <div>
+                <p className="text-gray-800 font-bold mb-2">Add to your meal</p>
+                <div className="mb-2 flex justify-between">
+                  <button
+                    className={`relative border rounded p-3 flex items-center justify-center ${
+                      selectedCombo.includes("fries")
+                        ? "border-yellow-500"
+                        : "border-gray-200"
+                    } text-gray-700`}
+                    onClick={() => handleComboSelection("fries")}
+                    style={{ width: "30%" }}
+                  >
+                    <span className="mr-2 text-3xl">🍟</span>Fries
+                    {selectedCombo.includes("fries") && (
+                      <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    className={`relative border rounded p-3 flex items-center justify-center ${
+                      selectedCombo.includes("soda")
+                        ? "border-yellow-500"
+                        : "border-gray-200"
+                    } text-gray-700`}
+                    onClick={() => handleComboSelection("soda")}
+                    style={{ width: "30%" }}
+                  >
+                    <span className="mr-2 text-3xl">🍔</span>Burgers
+                    {selectedCombo.includes("soda") && (
+                      <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    className={`relative border rounded p-3 flex items-center justify-center ${
+                      selectedCombo.includes("iceCream")
+                        ? "border-yellow-500"
+                        : "border-gray-200"
+                    } text-gray-700`}
+                    onClick={() => handleComboSelection("iceCream")}
+                    style={{ width: "30%" }}
+                  >
+                    <span className="mr-2 text-3xl">🥤</span>Drinks
+                    {selectedCombo.includes("iceCream") && (
+                      <span className="absolute top-0 right-0 mt-1 mr-1 flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 text-white">
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <div>
+                  <p className="text-gray-800 font-bold mb-2">Customize Desserts</p>
+                  <p className="text-gray-600 mb-2">Dessert customization options will go here.</p>
+                </div>
+              </div>
+              )}
+
+              
             </div>
           </div>
         )}
