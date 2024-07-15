@@ -10,7 +10,7 @@ describe("Authentication Component", () => {
 
   test("renders sign-in form", () => {
     render(<Authentication />);
-
+    //CHECK IG ==F THE THINGD ARE RENDERRED? 
     expect(screen.getByText("Sign in to your account")).toBeInTheDocument();
     expect(screen.getByLabelText("Email address")).toBeInTheDocument();
     expect(screen.getByLabelText("Password")).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe("Authentication Component", () => {
     localStorage.setItem("registrationData", JSON.stringify(storedData));
 
     render(<Authentication />);
-
+    // RENDERED AFTER CLICKING AND REGISTERINF
     fireEvent.change(screen.getByLabelText("Email address"), {
       target: { value: "wrong@example.com" },
     });
@@ -46,7 +46,7 @@ describe("Authentication Component", () => {
 
     expect(screen.getByText("Invalid email or password.")).toBeInTheDocument();
   });
-
+  // CHECKING IF THE ACCOUNT EXISTS
   test("shows success message for valid credentials", () => {
     const storedData = { email: "test@example.com", password: "password123" };
     localStorage.setItem("registrationData", JSON.stringify(storedData));
@@ -64,7 +64,7 @@ describe("Authentication Component", () => {
 
     expect(screen.getByText("Login Successful!")).toBeInTheDocument();
   });
-
+    // IF THE ACCOUNT DOES NT EXISTS
   test("shows error if no account is found", () => {
     render(<Authentication />);
 
