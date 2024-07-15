@@ -1,8 +1,8 @@
 // Registration.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
-import Registration from './Registration';
+import '@testing-library/jest-dom';
+import Registration from '../signup/page';
 
 test('renders registration form', () => {
     render(<Registration />);
