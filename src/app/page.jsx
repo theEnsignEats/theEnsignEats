@@ -5,7 +5,8 @@ import Hero from "../components/hero";
 import Map from "../components/map";
 import CTA from "../components/CTA";
 import Cards from "../components/cards";
-//import Carousel from "../components/carousel";
+
+
 
 export default function Home() {
   return (

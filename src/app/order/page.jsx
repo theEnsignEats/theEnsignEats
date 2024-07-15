@@ -1,18 +1,13 @@
-"use client"
-import React from 'react';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
+import Layout from "../../pageLayout";
+import OrderSummary from "../../components/orderSummary"; // Import OrderSummary component
 
-const OrderPage  = () => {
+
+const OrderPage = () => {
     return (
-        <div>
-            <main>
-                <Header/>
-                
-                <Footer/>
-            </main>
-            
-        </div>
+        <Layout>
+            <OrderSummary />
+        </Layout>
     );
 };
-export default OrderPage ;
+
+export default OrderPage;

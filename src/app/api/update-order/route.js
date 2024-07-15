@@ -1,7 +1,7 @@
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
-export async function POST(request) {
+export async function PUT(request) {
   const body = await request.json();
   const { customerName, orderItems, orderTotal } = body;
 
@@ -17,14 +17,17 @@ export async function POST(request) {
       throw new Error('Order items should be an array');
     }
 
-    console.log(`Received parameters: customerName=${customerName}, orderItems=${JSON.stringify(parsedOrderItems)}, orderTotal=${orderTotal}`);
+    console.log(`Received parameters for PUT request: customerName=${customerName}, orderItems=${JSON.stringify(parsedOrderItems)}, orderTotal=${orderTotal}`);
 
-    // Insert the new order
+    // Update existing order with PUT request
     await sql`
-      INSERT INTO Orders (customerName, orderItems, orderTotal) 
-      VALUES (${customerName}, ${JSON.stringify(parsedOrderItems)}::jsonb, ${orderTotal}::numeric);
+      UPDATE Orders
+      SET orderItems = ${JSON.stringify(parsedOrderItems)}::jsonb,
+          orderTotal = ${orderTotal}::numeric
+      WHERE customerName = ${customerName};
     `;
-    console.log(`Order for customer: ${customerName} has been added to the database.`);
+
+    console.log(`Order for customer: ${customerName} has been updated with PUT request.`);
 
     // Fetch and return all orders
     const orders = await sql`SELECT * FROM Orders;`;
@@ -44,7 +47,7 @@ export async function POST(request) {
     return NextResponse.json({ orders: processedOrders }, { status: 200 });
 
   } catch (error) {
-    console.error("Error creating order:", error);
+    console.error("Error updating order:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
