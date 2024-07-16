@@ -125,12 +125,12 @@ export default function Authentication() {  // Updated function name
               </form>
 
               <p className="mt-10 text-center text-sm text-gray-500">
-                Don&apos;t have an account?{" "}
+                Do not have an account?{" "}
                 <a
                     href="/signup"
                     className="font-medium text-emerald-600 hover:text-emerald-500"
                 >
-                  Register for free! & Earn rewards
+                  Register for free! Earn rewards
                 </a>
               </p>
             </div>
