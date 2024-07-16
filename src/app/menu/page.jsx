@@ -36,7 +36,7 @@ const MenuItems = [
   // Add more items as needed
 ];
 
-const MenuPage = () => {
+export default function MenuPage ()  {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -69,4 +69,4 @@ const MenuPage = () => {
   );
 };
 
-export default MenuPage;
+
