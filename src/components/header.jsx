@@ -45,9 +45,6 @@ class Header extends React.Component {
             <NavLink href="/menu" onClick={this.closeMenu}>
               Menu
             </NavLink>
-            <NavLink href="/order" onClick={this.closeMenu}>
-              Order
-            </NavLink>
             <button
               className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={this.handleLoginClick}

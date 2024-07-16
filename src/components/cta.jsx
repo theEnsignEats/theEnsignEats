@@ -8,7 +8,7 @@ const images = [
   '/carousel4.webp',
 ];
 
-const CTA = () => {
+const Cta = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const CTA = () => {
   );
 };
 
-export default CTA;
+export default Cta;
