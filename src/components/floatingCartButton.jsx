@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useDialog } from './DialogContext'; // Ensure the correct import path
+import { useDialog } from './dialogContext'; // Ensure the correct import path
 
 export default function FloatingCartButton() {
     const { setOpen } = useDialog();

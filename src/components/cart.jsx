@@ -2,7 +2,7 @@
 
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { useDialog } from './DialogContext';
+import { useDialog } from './dialogContext';
 
 export default function Cart() {
     const { open, setOpen } = useDialog();
@@ -24,8 +24,7 @@ export default function Cart() {
                             <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                                 <div className="px-4 sm:px-6">
                                     <div className="flex items-start justify-between">
-                                        <DialogTitle className="text-base font-semibold leading-6 text-gray-900">Panel
-                                            title</DialogTitle>
+                                        <DialogTitle className="text-base font-semibold leading-6 text-gray-900">Shopping Cart</DialogTitle>
                                         <div className="ml-3 flex h-7 items-center">
                                             <button
                                                 type="button"
@@ -38,12 +37,14 @@ export default function Cart() {
                                             </button>
                                         </div>
                                     </div>
+                                    <h1 className="text-black">This is a test</h1>
                                 </div>
                                 <div className="relative mt-6 flex-1 px-4 sm:px-6">{
                                     //content here
 
+
                                     <button type="button"
-                                            className="rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Checkout</button>
+                                            className="rounded-md bg-green-600 px-32 mx-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Checkout</button>
                                 }</div>
                             </div>
                         </DialogPanel>

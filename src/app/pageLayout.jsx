@@ -3,7 +3,7 @@ import Footer from '../components/footer';
 import Header from "../components/header";
 import FloatingCartButton from "../components/floatingCartButton";
 import Cart from "../components/cart";
-import { DialogProvider } from '@/components/DialogContext';
+import { DialogProvider } from '@/components/dialogContext';
 
 export default function Layout({ children }) {
     return (
