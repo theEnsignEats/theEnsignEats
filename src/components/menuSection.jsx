@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import MenuCards from "./MenuCards";
+import MenuCards from "./menuCards";
 import { MENU_ITEMS } from "../constants";
 
 const MenuSection = ({ onCardClick }) => {

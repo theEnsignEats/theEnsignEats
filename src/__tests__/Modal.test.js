@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Modal from '../components/Modal.jsx';
+import Modal from '../components/modal.jsx';
 
 const selectedItem = {
     name: 'Burger',

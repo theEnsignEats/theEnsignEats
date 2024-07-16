@@ -1,6 +1,6 @@
 "use client";
-import React from 'react';
-import Layout from '../pageLayout';
+import React from "react";
+import Layout from "../pageLayout";
 import Image from "next/image";
 
 const AboutPage = () => {
@@ -28,7 +28,7 @@ const HistorySection = () => (
                 Founded in 2020 by a group of passionate college friends, Ensign Eats has quickly become a beloved spot for students and locals alike. Our commitment to quality shines through in every bite, as we use only the freshest ingredients, sourced locally whenever possible, to craft our mouth-watering burgers.
             </p>
             <p className="text-lg text-white mb-4">
-                Join us at Ensign Eats, where great food and good times come together. We can't wait to serve you!
+                Join us at Ensign Eats, where great food and good times come together. We cannot wait to serve you!
             </p>
         </div>
         <div className="md:w-1/2 flex justify-center items-stretch mt-4 md:mt-0">
@@ -107,7 +107,7 @@ const AwardsSection = () => (
         <div className="block border-t-4 border-gold my-10"></div> {/* Horizontal divider */}
         <div className="flex flex-col-reverse sm:flex-row items-start">
             <p className="text-lg text-green-800 mb-4 flex-grow">
-                Along with their burgers, Ensign Eats' Strawberry Shortcake has won the Best Dessert award. This dessert, with its layers of soft shortcake, fresh strawberries, and whipped cream, is a hit with dessert lovers. Ensign Eats’ success in both burgers and desserts highlights their skill and commitment to delicious food.
+                Along with their burgers, Ensign Eats Strawberry Shortcake has won the Best Dessert award. This dessert, with its layers of soft shortcake, fresh strawberries, and whipped cream, is a hit with dessert lovers. Ensign Eats’ success in both burgers and desserts highlights their skill and commitment to delicious food.
             </p>
             <Image src="/bestdessert.jpg" alt="Best Dessert Award Seal" width={100} height={100} className="rounded-full sm:ml-4 mb-4 sm:mb-0 mx-auto sm:mx-0 w-24 h-24 sm:w-auto sm:h-auto" />
         </div>

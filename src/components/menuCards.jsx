@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import ItemCard from "./ItemCard";
+import ItemCard from "./itemCard";
 import MenuListItem from "./menuListItem";
 
 const MenuCards = ({ items, onCardClick }) => {

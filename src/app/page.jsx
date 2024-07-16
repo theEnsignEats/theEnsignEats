@@ -1,9 +1,10 @@
+"use client";
 import "tailwindcss/tailwind.css";
 import React from "react";
 import Layout from "./pageLayout";
 import Hero from "../components/hero";
 import Map from "../components/map";
-import CTA from "../components/CTA";
+import Cta from "../components/cta";
 import Cards from "../components/cards";
 //import Carousel from "../components/carousel";
 
@@ -14,7 +15,7 @@ export default function Home() {
         <Layout>
           <Hero />
           <Cards />
-          <CTA />
+          <Cta />
           <div>
             <Map />
           </div>

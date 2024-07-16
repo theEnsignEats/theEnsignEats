@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import Header from "../../components/header.jsx";
-import Footer from "../../components/footer.jsx";
 import Carousel from "../../components/carousel.jsx";
 import MenuSection from "../../components/menuSection.jsx";
-import Modal from "../../components/Modal.jsx";
+import Modal from "../../components/modal.jsx";
+import Layout from "../pageLayout.jsx";
 
 const MenuItems = [
   {
@@ -37,7 +36,7 @@ const MenuItems = [
   // Add more items as needed
 ];
 
-const MenuPage = () => {
+export default function MenuPage ()  {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -54,7 +53,7 @@ const MenuPage = () => {
   return (
     <div>
       <main>
-        <Header />
+        <Layout>
         <Carousel />
         <div className="flex justify-center">
           <MenuSection onCardClick={handleCardClick} />
@@ -64,10 +63,10 @@ const MenuPage = () => {
           onClose={closeModal}
           selectedItem={selectedItem}
         />
-        <Footer />
+        </Layout>
       </main>
     </div>
   );
 };
 
-export default MenuPage;
+
