@@ -20,7 +20,7 @@ export default function Authentication() {
     e.preventDefault();
 
     try {
-      const response = await fetch(".../api/login-info/route", {
+      const response = await fetch("../api/login-info/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
