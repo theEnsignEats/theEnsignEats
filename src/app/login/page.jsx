@@ -7,6 +7,7 @@ export default function Authentication() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [userName, setUserName] = useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -33,6 +34,8 @@ export default function Authentication() {
       }
 
       const data = await response.json();
+      setUserName(data.name);
+
       console.log("Login successful:", data);
       setLoginSuccess(true);
     } catch (error) {
@@ -48,7 +51,7 @@ export default function Authentication() {
           <h2 className="text-3xl font-bold leading-9 tracking-tight text-emerald-600">
             Login Successful!
           </h2>
-          <p className="mt-4 text-gray-500">Welcome back!</p>
+          <p className="mt-4 text-gray-500">Welcome back!, {userName}!</p>
         </div>
       ) : (
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
