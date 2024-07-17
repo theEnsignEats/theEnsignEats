@@ -1,5 +1,4 @@
-// Client-side component for login
-"use client"
+"use client";
 import React, { useState } from "react";
 
 export default function Authentication() {
@@ -44,6 +43,10 @@ export default function Authentication() {
     }
   };
 
+  const handleRedirect = () => {
+    window.location.href = "/";
+  };
+
   return (
     <div className="min-h-full flex flex-col justify-center items-center bg-white px-6 py-12 lg:px-8">
       {loginSuccess ? (
@@ -52,6 +55,12 @@ export default function Authentication() {
             Login Successful!
           </h2>
           <p className="mt-4 text-gray-500">Welcome back!, {userName}!</p>
+          <button
+            onClick={handleRedirect}
+            className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+          >
+            Home
+          </button>
         </div>
       ) : (
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">

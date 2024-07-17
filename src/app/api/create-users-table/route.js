@@ -1,7 +1,7 @@
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
-export async function GET(request) {
+export async function POST(request) {
     try {
         await sql`DROP TABLE IF EXISTS Orders;`;
 
