@@ -2,6 +2,11 @@ import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
+
+  const body = await request.json();
+  const { customerName, orderItems, orderTotal } = body;
+
+
   try {
     const { customerName, orderItems } = await request.json();
 
@@ -11,8 +16,11 @@ export async function POST(request) {
     }
 
     // Parse orderItems JSON
-    if (!Array.isArray(orderItems)) {
-      return NextResponse.json({ error: 'Order items should be an array' }, { status: 400 });
+
+    const parsedOrderItems = orderItems;
+    if (!Array.isArray(parsedOrderItems)) {
+      throw new Error('Order items should be an array');
+
     }
 
     // Calculate the order total
