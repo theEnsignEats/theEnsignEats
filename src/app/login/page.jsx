@@ -1,8 +1,8 @@
-"use client"; // This directive tells Next.js to treat this file as a client component
-
+// Client-side component for login
+"use client"
 import React, { useState } from "react";
 
-export default function authentication() {
+export default function Authentication() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,19 +16,28 @@ export default function authentication() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const storedData = localStorage.getItem("registrationData");
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      if (email === parsedData.email && password === parsedData.password) {
-        console.log("Sign-in successful!");
-        setLoginSuccess(true);
-      } else {
-        setError("Invalid email or password.");
+
+    try {
+      const response = await fetch(".../api/login-info/route", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Login failed");
       }
-    } else {
-      setError("No registered account found.");
+
+      const data = await response.json();
+      console.log("Login successful:", data);
+      setLoginSuccess(true);
+    } catch (error) {
+      console.error("Login error:", error.message);
+      setError("Invalid email or password.");
     }
   };
 
@@ -122,12 +131,12 @@ export default function authentication() {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-          Don&apos;t have an account?{" "}
+            Don't have an account?{" "}
             <a
               href="/signup"
               className="font-medium text-emerald-600 hover:text-emerald-500"
             >
-              Register for free! & Earn rewards
+              Register for free!
             </a>
           </p>
         </div>
