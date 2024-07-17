@@ -8,7 +8,16 @@ class Header extends React.Component {
     super(props);
     this.state = {
       isMobileMenuOpen: false,
+      isLoggedIn: false,
+      userName: "",
     };
+  }
+
+  componentDidMount() {
+    const userName = localStorage.getItem("userName");
+    if (userName) {
+      this.setState({ isLoggedIn: true, userName });
+    }
   }
 
   toggleMobileMenu = () => {
@@ -20,7 +29,13 @@ class Header extends React.Component {
   };
 
   handleLoginClick = () => {
-    window.location.assign("/login"); // Updated to use window.location.assign
+    if (this.state.isLoggedIn) {
+      // Handle logout
+      localStorage.removeItem("userName");
+      this.setState({ isLoggedIn: false, userName: "" });
+    } else {
+      window.location.assign("/login");
+    }
   };
 
   render() {
@@ -48,16 +63,31 @@ class Header extends React.Component {
             <NavLink href="/order" onClick={this.closeMenu}>
               Order
             </NavLink>
-            <button
-              className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={this.handleLoginClick}
-            >
-              Sign Up
-            </button>
+            {this.state.isLoggedIn ? (
+              <>
+                <span className="p-2 mx-2 rounded text-green-800">
+                  <h>Welcome, </h>
+                  {this.state.userName}
+                </span>
+                <button
+                  className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={this.handleLoginClick}
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <button
+                className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={this.handleLoginClick}
+              >
+                Sign Up
+              </button>
+            )}
           </div>
           <div className="relative">
             <button
-              aria-label="Toggle menu" // Added aria-label
+              aria-label="Toggle menu"
               className="md:hidden bg-yellow1 hover:text-green-800 hover:shadow-md hover:border-green-800 p-2 px-8 text-lg cursor-pointer rounded-full shadow-lg border-green-800 border flex items-center"
               onClick={this.toggleMobileMenu}
             >
@@ -91,12 +121,26 @@ class Header extends React.Component {
                 <NavLinkMobile href="/order" onClick={this.closeMenu}>
                   Order
                 </NavLinkMobile>
-                <button
-                  className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full text-left"
-                  onClick={this.handleLoginClick}
-                >
-                  Sign Up
-                </button>
+                {this.state.isLoggedIn ? (
+                  <>
+                    <span className="block text-lg py-1 px-3 rounded-lg text-green-800">
+                      {this.state.userName}
+                    </span>
+                    <button
+                      className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full text-left"
+                      onClick={this.handleLoginClick}
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className="rounded-full bg-customYellow hover:bg-yellow1 px-2.5 py-1 text-sm font-semibold text-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full text-left"
+                    onClick={this.handleLoginClick}
+                  >
+                    Sign Up
+                  </button>
+                )}
               </div>
             )}
           </div>

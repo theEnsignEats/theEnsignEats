@@ -37,6 +37,9 @@ export default function Authentication() {
 
       console.log("Login successful:", data);
       setLoginSuccess(true);
+
+      // Store the username in localStorage
+      localStorage.setItem("userName", data.name);
     } catch (error) {
       console.error("Login error:", error.message);
       setError("Invalid email or password.");
