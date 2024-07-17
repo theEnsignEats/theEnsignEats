@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
+
 const Modal = ({ show, onClose, selectedItem }) => {
+
+  const [order, setOrder] = useState(null);
+
   const defaultPrice =
     selectedItem && selectedItem.price
       ? parseFloat(selectedItem.price.slice(1))
@@ -26,6 +30,7 @@ const Modal = ({ show, onClose, selectedItem }) => {
   });
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [totalPrice, setTotalPrice] = useState(defaultPrice);
+
 
   const ingredientPrices = {
     cheese: 0.99,
@@ -85,6 +90,7 @@ const Modal = ({ show, onClose, selectedItem }) => {
     setSelectedIngredient(ingredient);
   };
 
+
   const handleQuantityChange = (amount) => {
     const newQuantity = quantity + amount;
     if (newQuantity > 0) {
@@ -93,10 +99,111 @@ const Modal = ({ show, onClose, selectedItem }) => {
     }
   };
 
-  const handleAddToCart = () => {
-    // Add logic to handle adding the item to the cart
-  };
 
+  const handleAddToCart = async () => {
+    // Prepare list of included and excluded ingredients with options
+    const includedIngredients = [];
+    const selectedOptions = [];
+  
+    Object.entries(ingredients).forEach(([ingredient, value]) => {
+      if (value === "extra") {
+        includedIngredients.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (+Extra)`);
+        selectedOptions.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (+Extra)`);
+      } else if (value === "regular") {
+        includedIngredients.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (Regular)`);
+        selectedOptions.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (Regular)`);
+      } else if (value === "light") {
+        includedIngredients.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (Light)`);
+        selectedOptions.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (Light)`);
+      }
+    });
+  
+    // Create the cart item object
+    const cartItem = {
+      item: `${selectedItem.name} - ${selectedOptions.join(", ")}`,
+      quantity: 1,
+      price: parseFloat(totalPrice.toFixed(2)), // Ensure price is a number
+    };
+  
+    // If order doesn't exist, create a new one
+    if (!order) {
+      const newOrder = {
+        customerName: 'John Doe',  // Replace with actual customer data
+        orderItems: [cartItem],
+        orderTotal: cartItem.price,
+      };
+  
+      // Update the local state with the new order
+      setOrder(newOrder);
+  
+      // Log the new order object (for debugging)
+      console.log('New Order:', newOrder);
+  
+      try {
+        // Send newOrder to backend using POST request (for creating new order)
+        const response = await fetch('/api/add-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newOrder),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to add order');
+        }
+  
+        const data = await response.json();
+        console.log('Order successfully added:', data);
+  
+      } catch (error) {
+        console.error('Error adding order:', error);
+        // Handle error scenario (e.g., display error message to user)
+      }
+  
+    } else {
+      // Update existing order with new cart item and order total
+      const updatedOrder = {
+        ...order,
+        orderItems: [...order.orderItems, cartItem],
+        orderTotal: parseFloat((order.orderTotal + cartItem.price).toFixed(2)),
+      };
+  
+      // Update local state with the updated order
+      setOrder(updatedOrder);
+  
+      // Log the updated order object (for debugging)
+      console.log('Updated Order:', updatedOrder);
+  
+      try {
+        // Send updatedOrder to backend using PUT request (for updating existing order)
+        const response = await fetch('/api/update-order', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedOrder),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to update order');
+        }
+  
+        const data = await response.json();
+        console.log('Order successfully updated:', data);
+  
+      } catch (error) {
+        console.error('Error updating order:', error);
+        // Handle error scenario (e.g., display error message to user)
+      }
+    }
+  
+    // Close the modal or perform other UI updates as needed
+    onClose();
+
+  };
+   
+  
   if (!show) return null;
 
   return (
@@ -135,7 +242,9 @@ const Modal = ({ show, onClose, selectedItem }) => {
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
 
-              {selectedItem.categoryName === "Burgers" && (
+
+              {selectedItem.categoryName === 'Burgers' && (
+
                 <div>
                   <p className="text-gray-800 font-bold mb-2">
                     Add to your meal
@@ -229,16 +338,20 @@ const Modal = ({ show, onClose, selectedItem }) => {
                     </div>
                   )}
                   <div className="mt-2">
-                    <p className="text-gray-800 font-bold mb-1">
-                      Customize Ingredients
-                    </p>
+
+    
+
+                    <p className="text-gray-800 font-bold mb-1">Customize Ingredients</p>
+
                     {Object.keys(ingredients).map((ingredient) => (
                       <div key={ingredient} className="mb-1 flex items-center">
                         <input
                           type="checkbox"
                           checked={ingredients[ingredient] !== "none"}
                           onChange={() => handleCheckboxChange(ingredient)}
+
                           className="mr-2 text-black"
+
                         />
                         <span className="mr-2 capitalize text-gray-900">
                           {ingredient}
@@ -248,7 +361,11 @@ const Modal = ({ show, onClose, selectedItem }) => {
                             <button
                               className={`px-2 py-1 rounded text-sm ${
                                 ingredients[ingredient] === "light"
+
                                   ? "bg-yellow-500 text-white"
+
+
+
                                   : "bg-gray-200"
                               }`}
                               onClick={() =>
@@ -260,7 +377,9 @@ const Modal = ({ show, onClose, selectedItem }) => {
                             <button
                               className={`px-2 py-1 rounded text-sm ${
                                 ingredients[ingredient] === "regular"
+
                                   ? "bg-yellow-500 text-white"
+
                                   : "bg-gray-200"
                               }`}
                               onClick={() =>
@@ -272,7 +391,9 @@ const Modal = ({ show, onClose, selectedItem }) => {
                             <button
                               className={`px-2 py-1 rounded text-sm ${
                                 ingredients[ingredient] === "extra"
+
                                   ? "bg-yellow-500 text-white"
+
                                   : "bg-gray-200"
                               }`}
                               onClick={() =>
@@ -291,6 +412,7 @@ const Modal = ({ show, onClose, selectedItem }) => {
 
               {selectedItem.categoryName === "Drinks" && (
                 <div>
+
                   <div>
                     <p className="text-gray-800 text-lg font-bold mb-2">
                       Customize Your Drink
@@ -342,6 +464,52 @@ const Modal = ({ show, onClose, selectedItem }) => {
             onClick={handleAddToCart}
           >
             Add to cart - ${totalPrice.toFixed(2)}
+          </button>
+          <button
+            className="bg-red-500 text-white items-center w-10 h-10 rounded"
+            onClick={() => onDelete(selectedItem.id)}
+          >
+            <svg
+              fill="#ffffff"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="10 3 850 550"
+              stroke="#ffffff"
+              width="60"
+              height="30"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <g>
+                  <g>
+                    <path
+                      d="M381.163,57.799h-75.094C302.323,25.316,274.686,0,241.214,0c-33.471,0-61.104,25.315-64.85,57.799h-75.098
+                          c-30.39,0-55.111,24.728-55.111,55.117v2.828c0,23.223,14.46,43.1,34.83,51.199v260.369c0,30.39,24.724,55.117,55.112,55.117
+                          h210.236c30.389,0,55.111-24.729,55.111-55.117V166.944c20.369-8.1,34.83-27.977,34.83-51.199v-2.828
+                          C436.274,82.527,411.551,57.799,381.163,57.799z M241.214,26.139c19.037,0,34.927,13.645,38.443,31.66h-76.879
+                          C206.293,39.783,222.184,26.139,241.214,26.139z M375.305,427.312c0,15.978-13,28.979-28.973,28.979H136.096
+                          c-15.973,0-28.973-13.002-28.973-28.979V170.861h268.182V427.312z M410.135,115.744c0,15.978-13,28.979-28.973,28.979H101.266
+                          c-15.973,0-28.973-13.001-28.973-28.979v-2.828c0-15.978,13-28.979,28.973-28.979h279.897c15.973,0,28.973,13.001,28.973,28.979
+                          V115.744z"
+                    ></path>
+                    <path
+                      d="M171.144,422.863c7.218,0,13.069-5.853,13.069-13.068V262.641c0-7.216-5.852-13.07-13.069-13.07
+                          c-7.217,0-13.069,5.854-13.069,13.07v147.154C158.074,417.012,163.926,422.863,171.144,422.863z"
+                    ></path>
+                    <path
+                      d="M241.214,422.863c7.218,0,13.07-5.853,13.07-13.068V262.641c0-7.216-5.854-13.07-13.07-13.07
+                          c-7.217,0-13.069,5.854-13.069,13.07v147.154C228.145,417.012,233.996,422.863,241.214,422.863z"
+                    ></path>
+                    <path
+                      d="M311.284,422.863c7.217,0,13.068-5.853,13.068-13.068V262.641c0-7.216-5.852-13.07-13.068-13.07
+                          c-7.219,0-13.07,5.854-13.07,13.07v147.154C298.213,417.012,304.067,422.863,311.284,422.863z"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+            </svg>
           </button>
         </div>
       </div>
