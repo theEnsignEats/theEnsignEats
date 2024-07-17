@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-const Modal = ({ show, onClose, selectedItem, onDelete }) => {
+
+const Modal = ({ show, onClose, selectedItem }) => {
+
+  const [order, setOrder] = useState(null);
+
   const defaultPrice =
     selectedItem && selectedItem.price
       ? parseFloat(selectedItem.price.slice(1))
@@ -64,10 +68,109 @@ const Modal = ({ show, onClose, selectedItem, onDelete }) => {
     setSelectedIngredient(ingredient);
   };
 
-  const handleAddToCart = () => {
-    // Add logic to handle adding the item to the cart
+  const handleAddToCart = async () => {
+    // Prepare list of included and excluded ingredients with options
+    const includedIngredients = [];
+    const selectedOptions = [];
+  
+    Object.entries(ingredients).forEach(([ingredient, value]) => {
+      if (value === "extra") {
+        includedIngredients.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (+Extra)`);
+        selectedOptions.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (+Extra)`);
+      } else if (value === "regular") {
+        includedIngredients.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (Regular)`);
+        selectedOptions.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (Regular)`);
+      } else if (value === "light") {
+        includedIngredients.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (Light)`);
+        selectedOptions.push(`${ingredient.charAt(0).toUpperCase() + ingredient.slice(1)} (Light)`);
+      }
+    });
+  
+    // Create the cart item object
+    const cartItem = {
+      item: `${selectedItem.name} - ${selectedOptions.join(", ")}`,
+      quantity: 1,
+      price: parseFloat(totalPrice.toFixed(2)), // Ensure price is a number
+    };
+  
+    // If order doesn't exist, create a new one
+    if (!order) {
+      const newOrder = {
+        customerName: 'John Doe',  // Replace with actual customer data
+        orderItems: [cartItem],
+        orderTotal: cartItem.price,
+      };
+  
+      // Update the local state with the new order
+      setOrder(newOrder);
+  
+      // Log the new order object (for debugging)
+      console.log('New Order:', newOrder);
+  
+      try {
+        // Send newOrder to backend using POST request (for creating new order)
+        const response = await fetch('/api/add-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newOrder),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to add order');
+        }
+  
+        const data = await response.json();
+        console.log('Order successfully added:', data);
+  
+      } catch (error) {
+        console.error('Error adding order:', error);
+        // Handle error scenario (e.g., display error message to user)
+      }
+  
+    } else {
+      // Update existing order with new cart item and order total
+      const updatedOrder = {
+        ...order,
+        orderItems: [...order.orderItems, cartItem],
+        orderTotal: parseFloat((order.orderTotal + cartItem.price).toFixed(2)),
+      };
+  
+      // Update local state with the updated order
+      setOrder(updatedOrder);
+  
+      // Log the updated order object (for debugging)
+      console.log('Updated Order:', updatedOrder);
+  
+      try {
+        // Send updatedOrder to backend using PUT request (for updating existing order)
+        const response = await fetch('/api/update-order', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedOrder),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to update order');
+        }
+  
+        const data = await response.json();
+        console.log('Order successfully updated:', data);
+  
+      } catch (error) {
+        console.error('Error updating order:', error);
+        // Handle error scenario (e.g., display error message to user)
+      }
+    }
+  
+    // Close the modal or perform other UI updates as needed
+    onClose();
   };
-
+   
+  
   if (!show) return null;
 
   return (
