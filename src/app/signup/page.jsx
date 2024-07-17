@@ -9,6 +9,7 @@ export default function Registration() {
     passwordconfirm: "",
   });
   const [isRegistered, setIsRegistered] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +19,37 @@ export default function Registration() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("registrationData", JSON.stringify(formData));
-    setIsRegistered(true);
+    setError(""); // Clear any previous errors
+
+    try {
+      const response = await fetch("/api/user-registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        setError(result.error);
+        return;
+      }
+
+      setIsRegistered(true);
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        passwordconfirm: "",
+      });
+    } catch (error) {
+      setError("An error occurred. Please try again.");
+      console.error("Registration error:", error);
+    }
   };
 
   return (
@@ -42,6 +70,9 @@ export default function Registration() {
           <div className="mb-4 text-center text-sm text-green-600">
             Your account has been registered successfully!
           </div>
+        )}
+        {error && (
+          <div className="mb-4 text-center text-sm text-red-600">{error}</div>
         )}
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
