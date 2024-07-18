@@ -1,12 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import Header from "../../components/header.jsx";
-import Footer from "../../components/footer.jsx";
+import Layout from "../pageLayout.jsx";
 import Carousel from "../../components/carousel.jsx";
 import MenuSection from "../../components/menuSection.jsx";
 import Modal from "../../components/Modal.jsx";
 
-const MenuPage = () => {
+export default function MenuPage () {
   const [items, setItems] = useState([
     { id: 1, name: "Delicious Item 1", description: "A delightful item with fresh ingredients and rich flavors.", price: "$8.99", categoryName: 'Burgers', image: "carousel1.jpg" },
     { id: 2, name: "Delicious Item 2", description: "A second delightful item with fresh ingredients and rich flavors.", price: "$9.99", categoryName: 'Drinks', image: "carousel2.jpg" },
@@ -35,7 +34,7 @@ const MenuPage = () => {
   return (
     <div>
       <main>
-        <Header />
+        <Layout>
         <Carousel />
         <div className="flex justify-center">
           <MenuSection items={items} onCardClick={handleCardClick} />
@@ -46,10 +45,10 @@ const MenuPage = () => {
           selectedItem={selectedItem}
           onDelete={handleDelete} 
         />
-        <Footer />
+        </Layout>
       </main>
     </div>
   );
 };
 
-export default MenuPage;
+
